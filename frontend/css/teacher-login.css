@@ -1,0 +1,6 @@
+/* Teacher login - green */
+body.auth {
+  --primary: #059669;
+  --side-1: #047857;
+  --side-2: #10b981;
+}

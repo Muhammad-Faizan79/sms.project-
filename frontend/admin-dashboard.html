@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard - SRMS</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/admin-dashboard.css">
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">🎓</div>
+        <h2>SRMS</h2>
+        <p>Admin Panel<br>Result Management</p>
+      </div>
+      <ul class="nav" id="menu">
+        <li data-sec="home" class="active">🏠 Dashboard</li>
+        <li data-sec="students">👥 Students</li>
+        <li data-sec="teachers">👨‍🏫 Teachers</li>
+        <li data-sec="courses">📚 Courses</li>
+        <li data-sec="results">🏆 Results</li>
+        <li data-sec="exams">📝 Exams</li>
+        <li data-sec="notices">📢 Notices</li>
+        <li data-sec="feedback">💬 Feedback</li>
+        <li data-sec="settings">⚙️ Settings</li>
+      </ul>
+      <div class="logout" id="logoutBtn">🚪 Logout</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="top-right">
+          <button class="theme-btn" id="themeBtn" type="button">🌙 Dark</button>
+          <div class="user"><span class="avatar">A</span><b>Administrator</b></div>
+        </div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===== HOME ===== -->
+        <section id="home">
+          <div class="banner">
+            <div>
+              <h4 id="greeting">Good Morning 👋</h4>
+              <h2>Administrator!</h2>
+              <p>Here is an overview of your institute today.</p>
+            </div>
+            <div class="big">🏫</div>
+          </div>
+          <div class="stats">
+            <div class="stat"><span class="ico c-blue">👥</span><div><small>Students</small><b id="stStudents">0</b><em>Registered</em></div></div>
+            <div class="stat"><span class="ico c-green">👨‍🏫</span><div><small>Teachers</small><b id="stTeachers">0</b><em>Faculty</em></div></div>
+            <div class="stat"><span class="ico c-purple">📚</span><div><small>Courses</small><b id="stCourses">0</b><em>Active</em></div></div>
+            <div class="stat"><span class="ico c-orange">🏆</span><div><small>Results</small><b id="stResults">0</b><em>Records</em></div></div>
+            <div class="stat"><span class="ico c-red">📊</span><div><small>Pass Rate</small><b id="stPass">0%</b><em>All exams</em></div></div>
+          </div>
+          <div class="grid g21">
+            <div class="card">
+              <h3>Top Performers</h3>
+              <div class="table-wrap"><table>
+                <thead><tr><th>#</th><th>Student</th><th>Roll No</th><th>Average %</th></tr></thead>
+                <tbody id="topBody"></tbody>
+              </table></div>
+            </div>
+            <div class="card">
+              <h3>Grade Distribution</h3>
+              <div class="bars" id="gradeBars"></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Latest Notices</h3>
+            <div id="homeNotices"></div>
+          </div>
+        </section>
+
+        <!-- ===== STUDENTS ===== -->
+        <section id="students" class="hide">
+          <div class="card">
+            <h3 id="sFormTitle">Add Student</h3>
+            <div class="form-grid">
+              <div class="fld"><label>Roll No</label><input id="sRoll" type="text"></div>
+              <div class="fld"><label>Full Name</label><input id="sName" type="text"></div>
+              <div class="fld"><label>Email</label><input id="sEmail" type="email"></div>
+              <div class="fld"><label>Password (8+ characters)</label><input id="sPass" type="password"></div>
+              <div class="fld"><label>Class (1-10)</label>
+                <select id="sCourse">
+                  <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
+                  <option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
+                  <option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option>
+                  <option value="10">Class 10</option>
+                </select>
+              </div>
+              <div class="fld"><label>Section</label>
+                <select id="sYear"><option>A</option><option>B</option><option>C</option></select>
+              </div>
+              <div class="fld"><label>Phone</label><input id="sPhone" type="number"></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn primary" id="sSave">Save Student</button>
+              <button class="btn hide" id="sCancel">Cancel Edit</button>
+            </div>
+            <p class="msg" id="sMsg"></p>
+          </div>
+          <div class="card hide" id="createdStudentQrCard">
+            <h3>New Student Attendance QR</h3>
+            <p class="muted">Print or download this QR code for the student. The student can also get it from their portal.</p>
+            <div class="student-qr-wrap">
+              <div id="createdStudentQr"></div>
+              <div>
+                <b id="createdStudentQrName"></b>
+                <p class="muted" id="createdStudentQrDetails"></p>
+                <button class="btn primary" id="downloadCreatedStudentQr" type="button">Download QR</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>All Students</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Roll No</th><th>Name</th><th>Email</th><th>Class</th><th>Section</th><th>Average</th><th>Action</th></tr></thead>
+              <tbody id="studentsBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== TEACHERS ===== -->
+        <section id="teachers" class="hide">
+          <div class="card">
+            <h3 id="tFormTitle">Add Teacher</h3>
+            <div class="form-grid">
+              <div class="fld"><label>Teacher ID</label><input id="tId" type="text"></div>
+              <div class="fld"><label>Full Name</label><input id="tName" type="text"></div>
+              <div class="fld"><label>Email</label><input id="tEmail" type="email"></div>
+              <div class="fld"><label>Password (8+ characters)</label><input id="tPass" type="password"></div>
+              <div class="fld"><label>Subject(s)</label><input id="tSubject" type="text"></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn primary" id="tSave">Save Teacher</button>
+              <button class="btn hide" id="tCancel">Cancel Edit</button>
+            </div>
+            <p class="msg" id="tMsg"></p>
+          </div>
+          <div class="card">
+            <h3>All Teachers</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Subject</th><th>Courses</th><th>Action</th></tr></thead>
+              <tbody id="teachersBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== COURSES ===== -->
+        <section id="courses" class="hide">
+          <div class="card">
+            <h3 id="cFormTitle">Add Course</h3>
+            <div class="form-grid">
+              <div class="fld"><label>Course Code</label><input id="cCode" type="text"></div>
+              <div class="fld"><label>Course Name</label><input id="cName" type="text"></div>
+              <div class="fld"><label>Assigned Teacher</label><select id="cTeacher"></select></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn primary" id="cSave">Save Course</button>
+              <button class="btn hide" id="cCancel">Cancel Edit</button>
+            </div>
+            <p class="msg" id="cMsg"></p>
+          </div>
+          <div class="card">
+            <h3>All Courses</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Code</th><th>Course</th><th>Teacher</th><th>Action</th></tr></thead>
+              <tbody id="coursesBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== RESULTS ===== -->
+        <section id="results" class="hide">
+          <div class="card">
+            <h3>Add Result</h3>
+            <div class="form-grid">
+              <div class="fld"><label>Student</label><select id="rStudent"></select></div>
+              <div class="fld"><label>Course</label><select id="rCourse"></select></div>
+              <div class="fld"><label>Exam Type</label>
+                <select id="rExam"><option>Mid Sem</option><option>End Sem</option><option>Quiz</option><option>Assignment</option><option>Practical</option><option>Internal</option></select>
+              </div>
+              <div class="fld"><label>Marks Obtained</label><input id="rMarks" type="number" min="0"></div>
+              <div class="fld"><label>Total Marks</label><input id="rTotal" type="number" min="1" value="100"></div>
+              <div class="fld"><label>Date</label><input id="rDate" type="date"></div>
+            </div>
+            <div class="btn-row"><button class="btn primary" id="rSave">Add Result</button></div>
+            <p class="msg" id="rMsg"></p>
+          </div>
+          <div class="card">
+            <h3>All Results</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Student</th><th>Course</th><th>Exam</th><th>Marks</th><th>Grade</th><th>Date</th><th>Action</th></tr></thead>
+              <tbody id="resultsBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== EXAMS ===== -->
+        <section id="exams" class="hide">
+          <div class="card">
+            <h3>Add Exam</h3>
+            <div class="form-grid">
+              <div class="fld"><label>Course</label><select id="eCourse"></select></div>
+              <div class="fld"><label>Exam Type</label>
+                <select id="eType"><option>End Sem</option><option>Mid Sem</option><option>Quiz</option><option>Practical</option></select>
+              </div>
+              <div class="fld"><label>Date</label><input id="eDate" type="date"></div>
+              <div class="fld"><label>Time</label><input id="eTime" type="text" value="10:00 AM"></div>
+              <div class="fld"><label>Room / Hall</label><input id="eRoom" type="text"></div>
+            </div>
+            <div class="btn-row"><button class="btn primary" id="eSave">Add Exam</button></div>
+            <p class="msg" id="eMsg"></p>
+          </div>
+          <div class="card">
+            <h3>Exam Schedule</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Course</th><th>Exam</th><th>Date</th><th>Time</th><th>Room</th><th>Action</th></tr></thead>
+              <tbody id="examsBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== NOTICES ===== -->
+        <section id="notices" class="hide">
+          <div class="card">
+            <h3>Post a Notice</h3>
+            <div class="form-grid">
+              <div class="fld full"><label>Title</label><input id="nTitle" type="text"></div>
+              <div class="fld full"><label>Message</label><textarea id="nText"></textarea></div>
+            </div>
+            <div class="btn-row"><button class="btn primary" id="nSave">Post Notice</button></div>
+            <p class="msg" id="nMsg"></p>
+          </div>
+          <div class="card">
+            <h3>All Notices</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Title</th><th>Message</th><th>Posted By</th><th>Date</th><th>Action</th></tr></thead>
+              <tbody id="noticesBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== FEEDBACK ===== -->
+        <section id="feedback" class="hide">
+          <div class="card">
+            <h3>Student Feedback</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Student</th><th>Subject</th><th>Rating</th><th>Message</th><th>Date</th><th>Action</th></tr></thead>
+              <tbody id="feedbackBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== SETTINGS ===== -->
+        <section id="settings" class="hide">
+          <div class="grid g2">
+            <div class="card">
+              <h3>Change Admin Password</h3>
+              <div class="form-grid">
+                <div class="fld full"><label>Current Password</label><input id="oldPass" type="password"></div>
+                <div class="fld"><label>New Password (8+ characters)</label><input id="newPass" type="password"></div>
+                <div class="fld"><label>Confirm New Password</label><input id="newPass2" type="password"></div>
+              </div>
+              <div class="btn-row"><button class="btn primary" id="passSave">Update Password</button></div>
+              <p class="msg" id="passMsg"></p>
+            </div>
+            <div class="card">
+              <h3>Backup &amp; Reset</h3>
+              <p class="muted">Download a copy of the database records.</p>
+              <div class="btn-row">
+                <button class="btn primary" id="backupBtn">Download Backup (JSON)</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <footer class="foot">&copy; 2024 Student Result Management System. Admin Panel</footer>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/admin-dashboard-live.js" type="module"></script>
+</body>
+</html>

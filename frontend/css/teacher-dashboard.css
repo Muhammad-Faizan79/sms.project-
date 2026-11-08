@@ -1,0 +1,9 @@
+/* Teacher dashboard - green theme */
+body {
+  --primary: #059669;
+  --side-1: #047857;
+  --side-2: #10b981;
+}
+input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
+.attendance-status { width: 130px; border: 1px solid var(--input-line); border-radius: 7px; padding: 6px 8px; background: var(--surface); }
+.attendance-qr-reader { max-width: 460px; margin: 18px auto; }

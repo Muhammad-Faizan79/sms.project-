@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teacher Dashboard - SRMS</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/teacher-dashboard.css">
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">🎓</div>
+        <h2>SRMS</h2>
+        <p>Teacher Panel<br>Result Management</p>
+      </div>
+      <ul class="nav" id="menu">
+        <li data-sec="home" class="active">🏠 Dashboard</li>
+        <li data-sec="marks">🏆 Enter Marks</li>
+        <li data-sec="attendance">✅ Attendance</li>
+        <li data-sec="students">👥 Students</li>
+        <li data-sec="notices">📢 Notices</li>
+        <li data-sec="profile">👤 Profile</li>
+      </ul>
+      <div class="logout" id="logoutBtn">🚪 Logout</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="top-right">
+          <button class="theme-btn" id="themeBtn" type="button">🌙 Dark</button>
+          <div class="user"><span class="avatar" id="avatar"></span><b id="userName"></b></div>
+        </div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===== HOME ===== -->
+        <section id="home">
+          <div class="banner">
+            <div>
+              <h4 id="greeting">Good Morning 👋</h4>
+              <h2 id="bannerName"></h2>
+              <p>Manage your classes, marks and attendance.</p>
+            </div>
+            <div class="big">👨‍🏫</div>
+          </div>
+          <div class="stats">
+            <div class="stat"><span class="ico c-green">📚</span><div><small>My Courses</small><b id="stCourses">0</b><em>Assigned</em></div></div>
+            <div class="stat"><span class="ico c-blue">👥</span><div><small>Students</small><b id="stStudents">0</b><em>In my classes</em></div></div>
+            <div class="stat"><span class="ico c-purple">📝</span><div><small>Results Entered</small><b id="stResults">0</b><em>Total records</em></div></div>
+            <div class="stat"><span class="ico c-orange">📊</span><div><small>Average Score</small><b id="stAvg">0%</b><em>My courses</em></div></div>
+          </div>
+          <div class="grid g2">
+            <div class="card">
+              <h3>My Courses</h3>
+              <div class="table-wrap"><table>
+                <thead><tr><th>Course</th><th>Avg Score</th><th>Attendance</th></tr></thead>
+                <tbody id="homeCourses"></tbody>
+              </table></div>
+            </div>
+            <div class="card">
+              <h3>Recently Entered Results</h3>
+              <div class="table-wrap"><table>
+                <thead><tr><th>Student</th><th>Course</th><th>Exam</th><th>Marks</th></tr></thead>
+                <tbody id="homeResults"></tbody>
+              </table></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== ENTER MARKS ===== -->
+        <section id="marks" class="hide">
+          <div class="card">
+            <h3 id="mTitle">Add Result</h3>
+            <div class="form-grid">
+              <div class="fld"><label>Course</label><select id="mCourse"></select></div>
+              <div class="fld"><label>Student</label><select id="mStudent"></select></div>
+              <div class="fld"><label>Exam Type</label>
+                <select id="mExam">
+                  <option>Mid Sem</option><option>End Sem</option><option>Quiz</option>
+                  <option>Assignment</option><option>Practical</option><option>Internal</option>
+                </select>
+              </div>
+              <div class="fld"><label>Marks Obtained</label><input id="mMarks" type="number" min="0"></div>
+              <div class="fld"><label>Total Marks</label><input id="mTotal" type="number" min="1" value="100"></div>
+              <div class="fld"><label>Date</label><input id="mDate" type="date"></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn primary" id="mSave">Save Result</button>
+              <button class="btn hide" id="mCancel">Cancel Edit</button>
+            </div>
+            <p class="msg" id="mMsg"></p>
+          </div>
+
+          <div class="card">
+            <h3>Results of My Courses</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Student</th><th>Course</th><th>Exam</th><th>Marks</th><th>Grade</th><th>Date</th><th>Action</th></tr></thead>
+              <tbody id="marksBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== ATTENDANCE ===== -->
+        <section id="attendance" class="hide">
+          <div class="card">
+            <h3>Scan Student QR - Class 1 to 10</h3>
+            <p class="muted">Select the student's class and school date, then scan each student's QR code.</p>
+            <div class="form-grid">
+              <div class="fld"><label>Class</label><select id="saClass">
+                <option value="1">Class 1</option><option value="2">Class 2</option><option value="3">Class 3</option>
+                <option value="4">Class 4</option><option value="5">Class 5</option><option value="6">Class 6</option>
+                <option value="7">Class 7</option><option value="8">Class 8</option><option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+              </select></div>
+              <div class="fld"><label>School Date</label><input id="saDate" type="date"></div>
+            </div>
+            <div class="btn-row">
+              <button class="btn" id="loadSchoolAttendance" type="button">Load Class List</button>
+              <button class="btn primary" id="startSchoolScanner" type="button">Start QR Scanner</button>
+              <button class="btn hide" id="stopSchoolScanner" type="button">Stop Scanner</button>
+            </div>
+            <div id="attendanceQrReader" class="hide attendance-qr-reader"></div>
+            <p class="msg" id="schoolAttendanceMsg"></p>
+            <div class="table-wrap hide" id="schoolAttendanceBox" style="margin-top:14px">
+              <table>
+                <thead><tr><th>Roll No</th><th>Student</th><th>Status</th></tr></thead>
+                <tbody id="schoolAttendanceBody"></tbody>
+              </table>
+              <div class="btn-row"><button class="btn primary" id="saveSchoolAttendance" type="button">Save Class Attendance</button></div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Subject Attendance (existing courses)</h3>
+            <p class="muted">Use this section only if your school records attendance by subject.</p>
+            <div class="form-grid">
+              <div class="fld"><label>Course</label><select id="aCourse"></select></div>
+              <div class="fld"><label>Date</label><input id="aDate" type="date"></div>
+            </div>
+            <div class="btn-row"><button class="btn primary" id="aLoad">Show Students</button></div>
+            <div class="table-wrap hide" id="aBox" style="margin-top:14px">
+              <table>
+                <thead><tr><th>Roll No</th><th>Student</th><th>Status</th></tr></thead>
+                <tbody id="aBody"></tbody>
+              </table>
+              <div class="btn-row"><button class="btn primary" id="aSave">Save Subject Attendance</button></div>
+            </div>
+            <p class="msg" id="aMsg"></p>
+          </div>
+          <div class="card">
+            <h3>Attendance Summary (selected course)</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Student</th><th>Present</th><th>Late</th><th>Total Classes</th><th>Percentage</th></tr></thead>
+              <tbody id="aSummary"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== STUDENTS ===== -->
+        <section id="students" class="hide">
+          <div class="card">
+            <h3>All Students</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Roll No</th><th>Name</th><th>Email</th><th>Avg Score (my courses)</th></tr></thead>
+              <tbody id="studentsBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== NOTICES ===== -->
+        <section id="notices" class="hide">
+          <div class="card">
+            <h3>Post a Notice</h3>
+            <div class="form-grid">
+              <div class="fld full"><label>Title</label><input id="nTitle" type="text"></div>
+              <div class="fld full"><label>Message</label><textarea id="nText"></textarea></div>
+            </div>
+            <div class="btn-row"><button class="btn primary" id="nSave">Post Notice</button></div>
+            <p class="msg" id="nMsg"></p>
+          </div>
+          <div class="card">
+            <h3>My Notices</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Title</th><th>Message</th><th>Date</th><th>Action</th></tr></thead>
+              <tbody id="noticesBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== PROFILE ===== -->
+        <section id="profile" class="hide">
+          <div class="grid g2">
+            <div class="card"><h3>My Details</h3><div class="info-list" id="profileInfo"></div></div>
+            <div class="card">
+              <h3>Update Details</h3>
+              <div class="form-grid">
+                <div class="fld"><label>Email</label><input id="pEmail" type="email"></div>
+                <div class="fld"><label>Current Password (only to change password)</label><input id="pOld" type="password"></div>
+                <div class="fld"><label>New Password (8+ characters)</label><input id="pNew" type="password"></div>
+              </div>
+              <div class="btn-row"><button class="btn primary" id="saveProfile">Save Changes</button></div>
+              <p class="msg" id="profileMsg"></p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <footer class="foot">&copy; 2024 Student Result Management System. Teacher Panel</footer>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script type="module" src="js/teacher-dashboard-live.js"></script>
+</body>
+</html>

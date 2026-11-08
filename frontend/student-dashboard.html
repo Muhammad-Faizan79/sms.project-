@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Dashboard - SRMS</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/student-dashboard.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== Sidebar menu ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">🎓</div>
+        <h2>SRMS</h2>
+        <p>Student Result<br>Management System</p>
+      </div>
+      <ul class="nav" id="menu">
+        <li data-sec="home" class="active">🏠 Dashboard</li>
+        <li data-sec="profile">👤 Profile</li>
+        <li data-sec="courses">📚 Courses</li>
+        <li data-sec="results">🏆 Results</li>
+        <li data-sec="attendance">✅ Attendance</li>
+        <li data-sec="exams">📝 Exams</li>
+        <li data-sec="notices">📢 Notice Board</li>
+        <li data-sec="feedback">💬 Feedback</li>
+      </ul>
+      <div class="logout" id="logoutBtn">🚪 Logout</div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="top-right">
+          <button class="theme-btn" id="themeBtn" type="button">🌙 Dark</button>
+          <div class="user"><span class="avatar" id="avatar"></span><b id="userName"></b></div>
+        </div>
+      </header>
+
+      <div class="content">
+
+        <!-- ===== HOME ===== -->
+        <section id="home">
+          <div class="banner">
+            <div>
+              <h4 id="greeting">Good Morning 👋</h4>
+              <h2 id="bannerName"></h2>
+              <p>Stay updated with your academic journey.</p>
+            </div>
+            <div class="big">📚</div>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><span class="ico c-blue">📄</span><div><small>CGPA</small><b id="stCgpa">0</b><em>Current CGPA</em></div></div>
+            <div class="stat"><span class="ico c-green">📚</span><div><small>Courses Enrolled</small><b id="stCourses">0</b><em>This Semester</em></div></div>
+            <div class="stat"><span class="ico c-purple">📝</span><div><small>Exams Completed</small><b id="stExams">0</b><em>This Semester</em></div></div>
+            <div class="stat"><span class="ico c-orange">🏆</span><div><small>Overall Rank</small><b id="stRank">0</b><em id="stRankOf"></em></div></div>
+            <div class="stat"><span class="ico c-red">✅</span><div><small>Attendance</small><b id="stAtt">0%</b><em>This month</em></div></div>
+          </div>
+
+          <div class="grid g21">
+            <div class="card">
+              <h3>Recent Results</h3>
+              <div class="table-wrap"><table>
+                <thead><tr><th>Subject</th><th>Exam Type</th><th>Grade</th><th>Score</th><th>Date</th></tr></thead>
+                <tbody id="recentBody"></tbody>
+              </table></div>
+            </div>
+            <div class="card">
+              <h3>Notice Board</h3>
+              <div id="homeNotices"></div>
+            </div>
+          </div>
+
+          <div class="grid g2">
+            <div class="card">
+              <h3>Academic Calendar <small class="muted">(red = exam day)</small></h3>
+              <div class="cal-head"><button id="calPrev">‹</button><b id="calTitle"></b><button id="calNext">›</button></div>
+              <div class="cal-grid" id="calGrid"></div>
+            </div>
+            <div class="card">
+              <h3>Performance Overview</h3>
+              <div class="donut-row">
+                <div class="donut" id="donut"><div id="donutText">0%</div></div>
+                <ul class="legend" id="legend"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== PROFILE ===== -->
+        <section id="profile" class="hide">
+          <div class="grid g2">
+            <div class="card">
+              <h3>My Details</h3>
+              <div class="info-list" id="profileInfo"></div>
+            </div>
+            <div class="card">
+              <h3>Update Details</h3>
+              <div class="form-grid">
+                <div class="fld"><label>Email</label><input id="pEmail" type="email"></div>
+                <div class="fld"><label>Phone</label><input id="pPhone" type="text"></div>
+                <div class="fld"><label>Current Password (only to change password)</label><input id="pOld" type="password"></div>
+                <div class="fld"><label>New Password (8+ characters)</label><input id="pNew" type="password"></div>
+              </div>
+              <div class="btn-row"><button class="btn primary" id="saveProfile">Save Changes</button></div>
+              <p class="msg" id="profileMsg"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== COURSES ===== -->
+        <section id="courses" class="hide">
+          <div class="card">
+            <h3>My Courses</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Code</th><th>Course</th><th>Teacher</th><th>Attendance</th><th>Score</th><th>Grade</th></tr></thead>
+              <tbody id="coursesBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== RESULTS ===== -->
+        <section id="results" class="hide">
+          <div class="card">
+            <h3>Course-wise Summary</h3>
+            <p style="margin-bottom:10px">CGPA: <b id="rCgpa"></b> &nbsp;|&nbsp; Average: <b id="rAvg"></b> &nbsp;|&nbsp; Rank: <b id="rRank"></b></p>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Course</th><th>Percentage</th><th>Grade</th><th>Grade Point</th></tr></thead>
+              <tbody id="summaryBody"></tbody>
+            </table></div>
+          </div>
+          <div class="card">
+            <h3>All Exam Results</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Subject</th><th>Exam Type</th><th>Marks</th><th>%</th><th>Grade</th><th>Date</th></tr></thead>
+              <tbody id="allResultsBody"></tbody>
+            </table></div>
+            <div class="btn-row"><button class="btn primary" id="printBtn">🖨️ Print / Save as PDF</button></div>
+          </div>
+        </section>
+
+        <!-- ===== ATTENDANCE ===== -->
+        <section id="attendance" class="hide">
+          <div class="card">
+            <h3>My Student QR Code</h3>
+            <p class="muted">Show this QR code to your teacher when attendance is taken.</p>
+            <div class="student-qr-wrap">
+              <div id="studentQrCode" aria-label="Your attendance QR code"></div>
+              <div>
+                <b id="studentQrName"></b>
+                <p class="muted" id="studentQrDetails"></p>
+                <button class="btn primary" id="downloadStudentQr" type="button">Download QR</button>
+                <p class="msg" id="studentQrMsg"></p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Monthly Class Attendance</h3>
+            <p class="muted">Attendance is counted by school days recorded for your class.</p>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Month</th><th>Present</th><th>Late</th><th>Absent</th><th>Days Recorded</th><th>Attendance</th></tr></thead>
+              <tbody id="monthlyAttendance"></tbody>
+            </table></div>
+          </div>
+          <div class="card">
+            <h3>Subject Attendance</h3>
+            <div id="attList"></div>
+          </div>
+        </section>
+
+        <!-- ===== EXAMS ===== -->
+        <section id="exams" class="hide">
+          <div class="card">
+            <h3>Exam Schedule</h3>
+            <div class="table-wrap"><table>
+              <thead><tr><th>Course</th><th>Exam</th><th>Date</th><th>Time</th><th>Room</th><th>Status</th></tr></thead>
+              <tbody id="examsBody"></tbody>
+            </table></div>
+          </div>
+        </section>
+
+        <!-- ===== NOTICES ===== -->
+        <section id="notices" class="hide">
+          <div class="card">
+            <h3>Notice Board</h3>
+            <div id="allNotices"></div>
+          </div>
+        </section>
+
+        <!-- ===== FEEDBACK ===== -->
+        <section id="feedback" class="hide">
+          <div class="grid g2">
+            <div class="card">
+              <h3>Send Feedback</h3>
+              <div class="form-grid">
+                <div class="fld full"><label>Subject</label><input id="fSubject" type="text" maxlength="80"></div>
+                <div class="fld full"><label>Rating</label>
+                  <select id="fRating">
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Good</option>
+                    <option value="3">3 - Average</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="1">1 - Very poor</option>
+                  </select>
+                </div>
+                <div class="fld full"><label>Message</label><textarea id="fMessage" maxlength="500"></textarea></div>
+              </div>
+              <div class="btn-row"><button class="btn primary" id="sendFeedback">Submit Feedback</button></div>
+              <p class="msg" id="feedbackMsg"></p>
+            </div>
+            <div class="card">
+              <h3>My Feedback</h3>
+              <div id="myFeedback"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+      <footer class="foot">&copy; 2024 Student Result Management System. Made with ♥ for Students</footer>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script type="module" src="js/student-dashboard-live.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+/* Student dashboard - blue theme */
+body {
+  --primary: #2563eb;
+  --side-1: #1d4ed8;
+  --side-2: #3b82f6;
+}
+.att-box { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.att-box:last-child { border-bottom: 0; }
+.att-box .row { display: flex; justify-content: space-between; }
+.student-qr-wrap { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+#studentQrCode { width: 220px; min-height: 220px; display: grid; place-items: center; background: #fff; padding: 10px; border-radius: 10px; }
+#studentQrCode img, #studentQrCode canvas { max-width: 100%; height: auto; }

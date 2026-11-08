@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Login - SRMS</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/student-login.css">
+</head>
+<body class="auth">
+  <div class="auth-card">
+    <div class="auth-side">
+      <div class="logo">🎓</div>
+      <h1>Student Portal</h1>
+      <p>Check your results, attendance, exams and notices in one place.</p>
+    </div>
+
+    <div class="auth-form">
+      <button class="theme-btn auth-theme" id="themeBtn" type="button">🌙 Dark</button>
+      <h2>Student Login</h2>
+      <p class="sub">Welcome back! Please sign in.</p>
+
+      <form id="loginForm">
+        <div class="fld">
+          <label for="userId">Roll No / Email</label>
+          <input id="userId" type="text" placeholder="e.g. CSE2101">
+        </div>
+        <div class="fld">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter password">
+        </div>
+        <p class="msg err" id="loginError"></p>
+        <button class="btn primary" style="width:100%;height:44px" type="submit">Login as Student</button>
+      </form>
+
+      <div class="demo">Student accounts are created by the administrator.</div>
+
+      <div class="links">
+        <a href="teacher-login.html">Teacher Login</a>
+        <a href="admin-login.html">Admin Login</a>
+        <a href="index.html">Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/student-login.js"></script>
+</body>
+</html>

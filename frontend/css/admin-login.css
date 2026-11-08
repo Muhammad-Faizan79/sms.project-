@@ -1,0 +1,6 @@
+/* Admin login - purple */
+body.auth {
+  --primary: #6d28d9;
+  --side-1: #4c1d95;
+  --side-2: #7c3aed;
+}
