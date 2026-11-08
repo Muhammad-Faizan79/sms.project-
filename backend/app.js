@@ -10,7 +10,7 @@ dotenv.config();
 const app = express()
 
 app.use(cors({
-    origin: process.env.FRONTEND_ORIGIN || "http://localhost:5500",
+    origin: process.env.FRONTEND_ORIGIN || "https://smsproject-frontend-nine.vercel.app/",
   credentials: true
 }))
 app.use(cookieParser())
