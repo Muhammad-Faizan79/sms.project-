@@ -1,1 +1,1 @@
-export const baseUrl = window.SRMS_API_URL || "http://localhost:5000/api";
+export const baseUrl = "https://backend-fz8n.vercel.app/api";
