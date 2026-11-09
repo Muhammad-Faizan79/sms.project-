@@ -9,7 +9,6 @@ import students from "../model/student.js";
 
 const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
     sameSite: "none",
     path: "/",
     maxAge: 24 * 60 * 60 * 1000

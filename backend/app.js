@@ -10,8 +10,7 @@ dotenv.config();
 const app = express()
 
 const corsOptions = {
-    origin:"http://localhost:5500",
-    // origin: "https://smsproject-frontend-nine.vercel.app",
+    origin: "https://smsproject-frontend-nine.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
