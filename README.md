@@ -1,44 +1,57 @@
-# SRMS - School Result & Management System
+# SRMS - School Result Management System
 
-A full-stack School Result Management System built for managing student records, teacher accounts, courses, exams, results, notices, attendance, and feedback in a school environment.
+A modern school management system designed to streamline academic administration for schools, colleges, and educational institutions. The platform provides role-based access for administrators, teachers, and students to manage records, results, attendance, notices, and communication more efficiently.
 
-This repository contains both the backend API and the frontend web app:
+## Overview
 
-- `backend/` - Express.js + MongoDB REST API
-- `frontend/` - HTML, CSS, and JavaScript dashboards for admin, teacher, and student roles
+This project is built as a full-stack web application with a Node.js backend and a frontend interface developed using HTML, CSS, and JavaScript. It focuses on day-to-day school operations and simplifies the management of academic information across multiple user roles.
 
-## Project Overview
+## Key Features
 
-The system supports three main user roles:
+- Secure role-based authentication for admin, teacher, and student users
+- Student record management
+- Teacher management
+- Course and class administration
+- Exam and result management
+- Attendance tracking
+- QR-based attendance support for classes 1–10
+- Notice board and communication tools
+- Student feedback submission and review
+- Profile management for students
+- Cookie-based secure session handling
 
-- Admin: manage students, teachers, courses, exams, results, notices, feedback, and system settings
-- Teacher: record results, manage attendance, view student records, and post notices
-- Student: view courses, results, attendance, exams, notices, and submit feedback
+## User Roles
 
-The app uses HTTP-only cookies for authentication and stores session-related data securely on the backend.
+### Admin
+- Manage students, teachers, and courses
+- Create and update exam records
+- Publish academic results
+- Review student feedback
+- Manage notices and school-level data
 
-## Features
+### Teacher
+- Manage assigned courses and results
+- Record daily attendance
+- View student information
+- Post notices and updates
+- Monitor academic performance
 
-- Role-based login for admin, teacher, and student
-- Student and teacher management
-- Course and exam management
-- Result publishing and viewing
-- Notice board for teachers and students
-- School attendance tracking
-- QR-based attendance support for classes 1-10
-- Feedback submission and review
-- Profile updates for students
-- MongoDB-backed backend with secure secret-based auth
-- Frontend dashboards built with plain HTML, CSS, and JavaScript
+### Student
+- View academic results
+- Check attendance and notices
+- Access course information
+- Update personal profile
+- Submit feedback
 
 ## Tech Stack
 
 ### Backend
 - Node.js
 - Express.js
-- MongoDB with Mongoose
-- JWT for authentication
-- Cookie-parser
+- MongoDB
+- Mongoose
+- JWT authentication
+- Cookie Parser
 - CORS
 - dotenv
 
@@ -46,7 +59,7 @@ The app uses HTTP-only cookies for authentication and stores session-related dat
 - HTML5
 - CSS3
 - JavaScript
-- Static dashboard pages
+- Static dashboard screens
 
 ## Repository Structure
 
@@ -80,14 +93,14 @@ sms.project-
 
 ## Getting Started
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Muhammad-Faizan79/sms.project-.git
 cd sms.project-
 ```
 
-### 2. Setup the backend
+### 2. Configure the Backend
 
 ```bash
 cd backend
@@ -95,7 +108,7 @@ npm install
 cp .env.example .env
 ```
 
-Update the environment file with your own values:
+Then update the values in `.env`:
 
 ```env
 PORT=5000
@@ -114,9 +127,9 @@ Run the backend:
 npm run dev
 ```
 
-### 3. Setup the frontend
+### 3. Run the Frontend
 
-Open the `frontend` folder and serve it locally using a static server such as VS Code Live Server or a simple local HTTP server.
+The frontend is a static application and can be served locally using any simple HTTP server.
 
 Example:
 
@@ -125,36 +138,30 @@ cd frontend
 python -m http.server 5500
 ```
 
-Then open:
+Then open the app in the browser:
 
 ```text
 http://localhost:5500/index.html
 ```
 
-## Default Behavior
+## Application Behavior
 
-- Backend runs on `http://localhost:5000`
-- API health route: `GET /api/health`
-- Frontend is expected to run on `http://localhost:5500`
-- Authentication uses cookies, so the backend and frontend origin must match the configured CORS settings
-
-## Role Functionality
-
-- Admin: manages users, courses, exams, results, notices, feedback, and system-related actions
-- Teacher: manages course results, attendance, student information, and notices
-- Student: views academic progress, notices, attendance, and submits feedback
+- Backend API runs on `http://localhost:5000`
+- Health check endpoint: `GET /api/health`
+- Frontend requests use cookie-based authentication
+- CORS is configured for the frontend origin
 
 ## Notes
 
-- The frontend is built using plain HTML, CSS, and JavaScript instead of a framework.
-- QR attendance works best with HTTPS in production or `localhost` in development.
-- The project is designed as a school management system suitable for academic administration workflows.
+- The frontend is implemented with plain HTML, CSS, and JavaScript.
+- QR attendance support works best with HTTPS in production or `localhost` during local development.
+- The repository is designed as a practical school management solution for managing academic workflows.
+
+## Project Summary
+
+SRMS is a school result and management platform that brings academic administration into a single digital system. It helps institutions manage student performance, attendance, teacher activities, notices, and department-level operations in a simple and organized manner.
 
 ## License
 
-This project is currently without an explicit license file. If you are publishing it publicly, it is recommended to add an appropriate open-source license.
-
-## Suggested Repository Description
-
-School management system with admin, teacher, and student dashboards for results, attendance, notices, courses, and academic records.
+This project does not currently include a dedicated license file. If this repository is intended for public distribution, consider adding an appropriate open-source license.
 
