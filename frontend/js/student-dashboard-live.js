@@ -258,7 +258,7 @@ async function initialize() {
         }
     } catch(error) {
         console.log(error) 
-        // window.location.replace("student-login.html");
+        window.location.replace("student-login.html");
          }
 }
 initialize();
