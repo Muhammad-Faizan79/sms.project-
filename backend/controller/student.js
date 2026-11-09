@@ -17,6 +17,7 @@ const cookieOptions = {
 
 export const studentlogin = async (req, res) => {
     try {
+        console.log("hello student login");
         const { login, email, password } = req.body;
         const identifier = String(login || email || "").trim();
         if (!identifier || !password) return res.status(400).json({ message: "Roll number/email and password are required", status: false });
