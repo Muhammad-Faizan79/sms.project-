@@ -22,6 +22,6 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
         });
         const result = await response.json();
         if (!response.ok || !result.status) throw new Error(result.message || "Login failed");
-        window.location.replace("student-dashboard.html");
+        // window.location.replace("student-dashboard.html");
     } catch (error) { errorBox.textContent = error.message; }
 });
