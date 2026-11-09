@@ -256,6 +256,9 @@ async function initialize() {
             $("downloadStudentQr").disabled = true;
             showMsg("studentQrMsg", error.message, false);
         }
-    } catch { window.location.replace("student-login.html"); }
+    } catch(error) {
+        console.log(error) 
+        // window.location.replace("student-login.html");
+         }
 }
 initialize();
