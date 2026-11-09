@@ -257,8 +257,8 @@ async function initialize() {
             showMsg("studentQrMsg", error.message, false);
         }
     } catch(error) {
-        console.log(error) 
         window.location.replace("student-login.html");
+        console.log(error) 
          }
 }
 initialize();
